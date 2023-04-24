@@ -511,7 +511,7 @@
                 huashu = document.getElementById("huashu"+i);
                 if(huashu.value)
                     // Telegram.WebApp.sendData(huashu.value);
-                    post("https://www.google.com",{"q":"hello"},function(data){
+                    DemoApp.post("https://www.google.com",{"q":"hello"},function(data){
                         console.log(data);
                     })
             }
