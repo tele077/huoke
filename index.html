@@ -343,7 +343,7 @@
         initData: Telegram.WebApp.initData || '',
         initDataUnsafe: Telegram.WebApp.initDataUnsafe || {},
         MainButton: Telegram.WebApp.MainButton,
-        shushuIndex:1,
+        huashuIndex:1,
 
         init(options) {
           // const mainButton = Telegram.WebApp.MainButton;
@@ -374,19 +374,16 @@
             }
         },
         addnewHuashu(){
-          DemoApp.shushuIndex += 1;
+          DemoApp.huashuIndex += 1;
           new_huashu = document.createElement("input");
-          new_huashu.setAttribute("name", "huashu"+DemoApp.shushuIndex);
+          new_huashu.setAttribute("name", "huashu"+DemoApp.huashuIndex);
           new_huashu.setAttribute("placeholder", "添加新的话术");
           new_huashu.setAttribute("type", "text");
           div_huashu = document.getElementById("newHuashu");
           div_huashu.append(new_huashu);
         },
         submitHuashu(){
-          DemoApp.apiRequest("http://z.dd84.com/getword", "getword", {"tgid":5420587549},
-          function(result) {
-            console.log(result);
-          })
+          DemoApp.sendHuashu();
         },
         // actions
         sendMessage(msg_id, with_webview) {
@@ -507,6 +504,15 @@
                 Telegram.WebApp.sendData(new Date().toString());
             }
         },
+        sendHuashu(){
+            huashu_count = DemoApp.huashuIndex;
+            for(var i=1;i<=huashu_count;i++){
+                huashu = document.getElementsByName("huashu"+i);
+                if(huashu.innerText)
+                    Telegram.WebApp.sendData(huashu.innerText);
+            }
+            
+        },
 
         // Alerts
         showAlert(message) {
@@ -617,14 +623,14 @@
         },
 
         // Other
-        apiRequest(url,method, data, onCallback) {
+        apiRequest(method, data, onCallback) {
             // DISABLE BACKEND FOR FRONTEND DEMO
             // YOU CAN USE YOUR OWN REQUESTS TO YOUR OWN BACKEND
             // CHANGE THIS CODE TO YOUR OWN
             // return onCallback && onCallback({error: 'This function (' + method + ') should send requests to your backend. Please, change this code to your own.'});
 
             const authData = DemoApp.initData || '';
-            fetch(url, {
+            fetch('/demo/api', {
                 method: 'POST',
                 body: JSON.stringify(Object.assign(data, {
                     _auth: authData,
