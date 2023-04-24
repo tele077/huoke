@@ -377,6 +377,7 @@
           DemoApp.huashuIndex += 1;
           new_huashu = document.createElement("input");
           new_huashu.setAttribute("name", "huashu"+DemoApp.huashuIndex);
+          new_huashu.setAttribute("id", "huashu"+DemoApp.huashuIndex);
           new_huashu.setAttribute("placeholder", "添加新的话术");
           new_huashu.setAttribute("type", "text");
           div_huashu = document.getElementById("newHuashu");
@@ -507,9 +508,9 @@
         sendHuashu(){
             huashu_count = DemoApp.huashuIndex;
             for(var i=1;i<=huashu_count;i++){
-                huashu = document.getElementsByName("huashu"+i);
-                if(huashu.innerText)
-                    Telegram.WebApp.sendData(huashu.innerText);
+                huashu = document.getElementById("huashu"+i);
+                if(huashu.value)
+                    Telegram.WebApp.sendData(huashu.value);
             }
             
         },
