@@ -328,8 +328,8 @@
     </select></div> -->
 </section>
 
-<div class="viewport-border"></div>
-<div class="viewport-stable_border"></div>
+<!-- <div class="viewport-border"></div>
+<div class="viewport-stable_border"></div> -->
 
 <script type="application/javascript">
 
@@ -674,8 +674,8 @@
     const DemoAppViewport = {
         init() {
             DemoApp.init();
-            Telegram.WebApp.onEvent('viewportChanged', DemoAppViewport.setData);
-            DemoAppViewport.setData();
+            // Telegram.WebApp.onEvent('viewportChanged', DemoAppViewport.setData);
+            // DemoAppViewport.setData();
         },
         setData() {
             document.querySelector('.viewport-border')
@@ -772,10 +772,10 @@
                 ' | is_expanded: ' + (Telegram.WebApp.isExpanded ? 'true' : 'false'));
     }
     Telegram.WebApp.setHeaderColor('secondary_bg_color');
-    Telegram.WebApp.onEvent('viewportChanged', setViewportData);
-    setViewportData();
+    // Telegram.WebApp.onEvent('viewportChanged', setViewportData);
+    // setViewportData();
     Telegram.WebApp.onEvent('settingsButtonClicked', function() {
-        alert('Settings opened!');
+        // alert('Settings opened!');
     });
 
     // let prevBgColorVal = document.getElementById('bg_color_sel').value;
